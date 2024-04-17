@@ -1,7 +1,7 @@
 Version 2.2.0
 -------------
 
-Unreleased
+Released 2024-04-16
 
 -   Drop support for Python 3.7. :pr:`372`
 -   Use modern packaging metadata with ``pyproject.toml`` instead of ``setup.cfg``.
@@ -9,6 +9,13 @@ Unreleased
 -   Use ``flit_core`` instead of ``setuptools`` as build backend.
 -   Deprecate the ``__version__`` attribute. Use feature detection, or
     ``importlib.metadata.version("itsdangerous")``, instead. :issue:`371`
+-   ``Serializer`` and the return type of ``dumps`` is generic for type checking.
+    By default it is ``Serializer[str]`` and ``dumps`` returns a ``str``. If a
+    different ``serializer`` argument is given, it will try to infer the return
+    type of its ``dumps`` method. :issue:`347`
+-   The default ``hashlib.sha1`` may not be available in FIPS builds. Don't
+    access it at import time so the developer has time to change the default.
+    :issue:`375`
 
 
 Version 2.1.2
